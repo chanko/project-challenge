@@ -1,3 +1,11 @@
+<% if dog_counter.positive? && dog_counter.even? %>
+  <a href="#">
+  <article>
+    <%= image_tag 'ad.jpg', class: 'dog-photo', alt: 'Ad' %>
+  </article>
+  </a>
+<% end %>
+
 <a href="<%= url_for(dog) %>">
   <article>
     <h2 class="dog-name"><%= dog.name %></h2>
