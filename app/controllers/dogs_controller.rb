@@ -8,7 +8,7 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @pagy, @dogs = pagy(Dog.all, items: 5)
+    @pagy, @dogs = pagy(Dog.order(like_count: :desc), items: 5)
   end
 
   # GET /dogs/1
