@@ -3,6 +3,8 @@ class DogsController < ApplicationController
     :show, :edit, :update, :destroy, :like, :unlike
   ]
 
+  before_action :check_dog_owner, only: [:edit, :update, :destroy]
+
   # GET /dogs
   # GET /dogs.json
   def index
@@ -89,5 +91,11 @@ class DogsController < ApplicationController
         .require(:dog)
         .permit(:name, :description, images: [])
         .merge(owner: current_user)
+    end
+
+    def check_dog_owner
+      msg = 'Action only allowed by owner'
+      
+      redirect_to dogs_path, alert: msg if @dog.owner != current_user
     end
 end
