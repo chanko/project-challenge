@@ -1,5 +1,7 @@
 class DogsController < ApplicationController
-  before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :set_dog, only: [
+    :show, :edit, :update, :destroy, :like, :unlike
+  ]
 
   # GET /dogs
   # GET /dogs.json
@@ -61,6 +63,18 @@ class DogsController < ApplicationController
       format.html { redirect_to dogs_url, notice: 'Dog was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def like
+    Dog.increment_counter(:like_count, @dog.id)
+
+    redirect_to dog_path(@dog)
+  end
+
+  def unlike
+    Dog.decrement_counter(:like_count, @dog.id)
+
+    redirect_to dog_path(@dog)
   end
 
   private

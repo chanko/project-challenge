@@ -1,6 +1,9 @@
 <section>
   <h2><%= @dog.name %></h2>
-
+  Total likes: <%= @dog.like_count %>
+  <br />
+  <%= like_unlike_links(@dog) %>
+  <br />
   <% @dog.images.each do |image| %>
     <%= image_tag url_for(image), alt: "Photo of #{@dog.name}" %>
   <% end %>
